@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
     store: {type: Schema.Types.ObjectId, required:true},
     amount: {type: Number, required:true},
-    transactionDate: {type: Number, required:true},
+    transactionDate: {type: Date, required:true},
     timeframeInfo: {type: Schema.Types.ObjectId, ref:'TimeframeInfo', required:true}
 });
 
