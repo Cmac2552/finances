@@ -17,7 +17,7 @@ export class AppComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('http://localhost:3000/api/upload', formData).subscribe(response => {
+    this.http.post('http://localhost:3000/timeframeInfo/upload', formData).subscribe(response => {
       console.log("uploaded", response);
     })
   }
