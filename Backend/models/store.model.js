@@ -3,9 +3,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
     systemName: {type: String, required:true},
-    colinName: {type: String, required:true, unique:true},
-    designation: {type: String, required:true},
-    limit: {type: Number}
+    designation: {type: String, required:true}
 });
 
 schema.set('toJSON', {virtuals: true});
