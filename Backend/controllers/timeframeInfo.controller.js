@@ -5,7 +5,7 @@ module.exports = {
 }
 
 function upload(req, res, next) {
-    timeframeInfoService.upload(req.file)
+    timeframeInfoService.upload(req)
         .then(data => res.json(data))
         .catch(err => next(err));
 }
