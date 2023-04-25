@@ -7,7 +7,8 @@ const Store = db.Store;
 const Transactions = db.Transactions;
 
 module.exports = {
-    upload
+    upload,
+    getTimeframeInfo
 }
 
 async function upload({file}){
@@ -15,7 +16,7 @@ async function upload({file}){
     timeframeInfo.income =0;
     timeframeInfo.totalSpent =0;
     let data =[];
-    const reader = fs.createReadStream(file.path)
+    fs.createReadStream(file.path)
         .pipe(csv())
         .on('data', (row) =>{
             data.push(row);
@@ -67,4 +68,8 @@ async function storeDetermination(currentTransaction) {
                 return store;
             }
 
+}
+
+async function getTimeframeInfo(timeframeRequest){
+    return TimeframeInfo.findOne({timeframe:timeframeRequest})
 }

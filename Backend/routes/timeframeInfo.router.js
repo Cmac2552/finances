@@ -5,5 +5,6 @@ const multer = require('multer');
 const uploads = multer({dest: 'uploads/'});
 
 router.post('/upload', uploads.single('file'),timeframeInfoController.upload);
+router.get('/:id', timeframeInfoController.getTimeframeInfo)
 
 module.exports = router;
