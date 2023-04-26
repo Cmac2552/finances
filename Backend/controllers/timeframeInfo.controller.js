@@ -9,7 +9,7 @@ module.exports = {
 function upload(req, res, next) {
     timeframeInfoService.upload(req)
         .then(data => res.json({}))
-        .catch(err => next(err));
+        .catch(err => res.json({err}));
 }
 
 function getTimeframeInfo(req, res, next) {

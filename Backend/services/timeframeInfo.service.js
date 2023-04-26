@@ -2,6 +2,7 @@ const db = require('../db/databaseAccess');
 const http = require('http');
 const csv = require('csv-parser');
 const fs = require('fs');
+const { error } = require('console');
 const TimeframeInfo = db.TimeframeInfo;
 const Store = db.Store;
 const Transactions = db.Transactions;
@@ -39,12 +40,12 @@ async function upload({file}){
                 transaction.transactionDate = new Date(currentTransaction['Trans. Date']).toLocaleString().split(',')[0];
                 transaction.timeframeInfo = timeframeInfo;
                 if(Number(currentTransaction.Amount) > 0){
-                    transaction.save();
+                    transaction.save().e;
                     timeframeInfo.totalSpent = timeframeInfo.totalSpent + Number(currentTransaction.Amount);
                     timeframeInfo.transactions.push(transaction);
                 }
             }
-            timeframeInfo.save();
+            return timeframeInfo.save().catch(err=>{console.log(err)});
         });
 }
 
@@ -71,5 +72,5 @@ async function storeDetermination(currentTransaction) {
 }
 
 async function getTimeframeInfo(timeframeRequest){
-    return TimeframeInfo.findOne({timeframe:timeframeRequest})
+    return await TimeframeInfo.findOne({timeframe:timeframeRequest})
 }
