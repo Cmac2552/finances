@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    store: {type: Schema.Types.ObjectId, required:true},
+    store: {type: Schema.Types.ObjectId, ref: 'Store',required:true},
     amount: {type: Number, required:true},
-    transactionDate: {type: Date, required:true},
+    transactionDate: {type: String, required:true},
     timeframeInfo: {type: Schema.Types.ObjectId, ref:'TimeframeInfo', required:true}
 });
 

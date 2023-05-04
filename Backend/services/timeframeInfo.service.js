@@ -2,7 +2,6 @@ const db = require('../db/databaseAccess');
 const http = require('http');
 const csv = require('csv-parser');
 const fs = require('fs');
-const { error } = require('console');
 const TimeframeInfo = db.TimeframeInfo;
 const Store = db.Store;
 const Transactions = db.Transactions;
@@ -26,18 +25,19 @@ async function upload({file}){
         .on('end', async ()=>{
             for( let i =0; i < data.length; i++)
             {
-                let currentTransaction =data[i]; 
+                let currentTransaction =data[i];
+                month =  timeframeInfo.timeframe = new Date(currentTransaction['Trans. Date'])
+                    .getUTCMonth() + '/'+
+                    new Date(currentTransaction['Trans. Date']).getUTCFullYear();
+        
                 if(!timeframeInfo.timeframe){
                 
-                    month = 
-                    timeframeInfo.timeframe = new Date(currentTransaction['Trans. Date'])
-                        .getUTCMonth() + '/'+
-                        new Date(currentTransaction['Trans. Date']).getUTCFullYear();
+                    timeframeInfo.timeframe = month
                 }
                 let transaction = new Transactions();
                 await storeDetermination(currentTransaction).then(store => transaction.store = store);
                 transaction.amount = currentTransaction.Amount;
-                transaction.transactionDate = new Date(currentTransaction['Trans. Date']).toLocaleString().split(',')[0];
+                transaction.transactionDate = month;
                 transaction.timeframeInfo = timeframeInfo;
                 if(Number(currentTransaction.Amount) > 0){
                     transaction.save().e;
