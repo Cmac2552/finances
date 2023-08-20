@@ -6,4 +6,5 @@ module.exports = {
     Store: require('../models/store.model'),
     TimeframeInfo: require('../models/timeframeInfo.model'),
     Transactions: require('../models/transactions.model'),
+    Accounts: require('../models/accounts.model')
 }

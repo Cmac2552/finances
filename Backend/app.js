@@ -10,6 +10,8 @@ app.use(cors());
 app.use('/stores', require('./routes/store.router'));
 app.use('/timeframeinfo', require('./routes/timeframeInfo.router'));
 app.use('/transactions', require('./routes/transactions.router'));
+app.use('/accounts', require('./routes/accounts.router'));
+
 
 app.listen(3000, () =>{
     console.log('Server started on port 3000')
