@@ -4,7 +4,8 @@ const Account = db.Accounts;
 
 module.exports = {
     getAccounts,
-    createAccount
+    createAccount,
+    updateBalance
 }
 
 async function getAccounts(){
@@ -12,7 +13,16 @@ async function getAccounts(){
 }
 
 async function createAccount(account){
-    let newAccount = new Account()
-    newAccount.name = account.name
+    let newAccount = new Account();
+    Object.keys(account).forEach((key)=>{
+        newAccount[key] = account[key];
+    })
+    // newAccount.name = account.name
     return await newAccount.save();
+}
+
+async function updateBalance(newBalance){
+    console.log(newBalance);
+    return await Account.updateOne({name:newBalance.name}, {$set:{balance:newBalance.balance}});
+    
 }

@@ -49,7 +49,8 @@ export class AppComponent {
 
   createAccount(){
     console.log(this.temp3);
-    this.http.post('http://localhost:3000/accounts/create-account',{name:this.temp3}).subscribe(data=>console.log(data));
+    // this.http.post('http://localhost:3000/accounts/create-account',{name:this.temp3}).subscribe(data=>console.log(data));
+    this.http.post('http://localhost:3000/accounts/update-balance',{name:this.temp3, balance:1000}).subscribe(data=>console.log(data));
     this.http.get<any>('http://localhost:3000/accounts').subscribe(data=>console.log(data));
 
   }
